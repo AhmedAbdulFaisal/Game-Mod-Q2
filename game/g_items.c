@@ -1301,7 +1301,7 @@ always owned, never in the world
 /* pickup */	"Blaster",
 		0,
 		0,
-		NULL,
+		"Cells",
 		IT_WEAPON|IT_STAY_COOP,
 		WEAP_BLASTER,
 		NULL,
