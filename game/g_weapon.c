@@ -53,6 +53,19 @@ static void check_dodge (edict_t *self, vec3_t start, vec3_t dir, int speed)
 }
 
 
+/* 
+Method used to track kills for every person
+	put within each 'touch' method and somehow cast it to p_weapon.c
+	Additionally put it within fire_lead to record deaths
+*/
+
+qboolean isKill(edict_t* ent) {
+	if (ent->health == 0) {
+		return true;
+	}
+	return false;
+}
+
 /*
 =================
 fire_hit
@@ -220,8 +233,12 @@ static void fire_lead (edict_t *self, vec3_t start, vec3_t aimdir, int damage, i
 	{
 		if (tr.fraction < 1.0)
 		{
+			if (isKill(tr.ent)) {
+				Com_Printf("Gamer Down\n");
+			}
 			if (tr.ent->takedamage)
 			{
+				//Com_Printf("Gamer Down\n");
 				T_Damage (tr.ent, self, self, aimdir, tr.endpos, tr.plane.normal, damage, kick, DAMAGE_BULLET, mod);
 			}
 			else
@@ -372,7 +389,6 @@ void fire_blaster (edict_t *self, vec3_t start, vec3_t dir, int damage, int spee
 	bolt->touch = blaster_touch;
 	bolt->nextthink = level.time + 2;
 	bolt->think = G_FreeEdict;
-	//literally change damage to 500 idfk
 	bolt->dmg = damage;
 	bolt->classname = "bolt";
 	if (hyper)
