@@ -266,9 +266,9 @@ void NoAmmoWeaponChange (edict_t *ent)
 		return;
 	}
 	if ( ent->client->pers.inventory[ITEM_INDEX(FindItem("shells"))]
-		&&  ent->client->pers.inventory[ITEM_INDEX(FindItem("shotgun"))] )
+		&&  ent->client->pers.inventory[ITEM_INDEX(FindItem("shotgun"))] ) //shotgun
 	{
-		ent->client->newweapon = FindItem ("shotgun");
+		ent->client->newweapon = FindItem ("shotgun"); //shotgun
 		return;
 	}
 	if (ent->client->pers.inventory[ITEM_INDEX(FindItem("cells"))]
@@ -827,6 +827,7 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	vec3_t	start;
 	vec3_t	offset;
 
+
 	if (!ent->client->pers.inventory[ent->client->ammo_index])
 	{
 		if (level.time >= ent->pain_debounce_time)
@@ -849,7 +850,6 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 		ent->client->kick_angles[0] = -1;
 
 		fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
-
 
 
 		// send muzzle flash

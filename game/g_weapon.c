@@ -60,6 +60,7 @@ Method used to track kills for every person
 */
 
 qboolean isKill(edict_t* ent) {
+	trace_t tr;
 	if (ent->health == 0) {
 		return true;
 	}
@@ -233,9 +234,9 @@ static void fire_lead (edict_t *self, vec3_t start, vec3_t aimdir, int damage, i
 	{
 		if (tr.fraction < 1.0)
 		{
-			if (isKill(tr.ent)) {
-				Com_Printf("Gamer Down\n");
-			}
+			//if (isKill(tr.ent)) {
+			//	Com_Printf("Gamer Down\n");
+			//}
 			if (tr.ent->takedamage)
 			{
 				//Com_Printf("Gamer Down\n");

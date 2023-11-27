@@ -1289,7 +1289,7 @@ gitem_t	itemlist[] =
 always owned, never in the world
 */
 	{
-		"weapon_blaster", 
+		"weapon_blaster", //weapon_blaster
 		NULL,
 		Use_Weapon,
 		NULL,
@@ -1298,7 +1298,7 @@ always owned, never in the world
 		NULL, 0,
 		"models/weapons/v_blast/tris.md2",
 /* icon */		"w_blaster",
-/* pickup */	"Blaster",
+/* pickup */	"Blaster", //Blaster
 		0,
 		0,
 		"Cells",
@@ -1312,7 +1312,7 @@ always owned, never in the world
 /*QUAKED weapon_shotgun (.3 .3 1) (-16 -16 -16) (16 16 16)
 */
 	{
-		"weapon_shotgun", 
+		"weapon_shotgun", //weapon_shotgun 
 		Pickup_Weapon,
 		Use_Weapon,
 		Drop_Weapon,
@@ -1321,7 +1321,7 @@ always owned, never in the world
 		"models/weapons/g_shotg/tris.md2", EF_ROTATE,
 		"models/weapons/v_shotg/tris.md2",
 /* icon */		"w_shotgun",
-/* pickup */	"Shotgun",
+/* pickup */	"Shotgun", //shotgun
 		0,
 		1,
 		"Shells",
