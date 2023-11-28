@@ -53,19 +53,7 @@ static void check_dodge (edict_t *self, vec3_t start, vec3_t dir, int speed)
 }
 
 
-/* 
-Method used to track kills for every person
-	put within each 'touch' method and somehow cast it to p_weapon.c
-	Additionally put it within fire_lead to record deaths
-*/
 
-qboolean isKill(edict_t* ent) {
-	trace_t tr;
-	if (ent->health == 0) {
-		return true;
-	}
-	return false;
-}
 
 /*
 =================
@@ -140,11 +128,147 @@ qboolean fire_hit (edict_t *self, vec3_t aim, int damage, int kick)
 
 /*
 =================
+A complete shameless rip-off of the main tracing code for bullets, I know
+
+I just need it to ring true
+=================
+*/
+qboolean fire_check(edict_t* self, vec3_t start, vec3_t aimdir) {
+	trace_t		tr;
+	vec3_t		dir;
+	vec3_t		forward, right, up;
+	vec3_t		end;
+	float		r;
+	float		u;
+	vec3_t		water_start;
+	qboolean	water = false;
+	int			content_mask = MASK_SHOT | MASK_WATER;
+
+	tr = gi.trace (self->s.origin, NULL, NULL, start, self, MASK_SHOT);
+	if (!(tr.fraction < 1.0))
+	{
+		vectoangles (aimdir, dir);
+		AngleVectors (dir, forward, right, up);
+		VectorMA (start, 8192, forward, end);
+
+		if (gi.pointcontents (start) & MASK_WATER)
+		{
+			water = true;
+			VectorCopy (start, water_start);
+			content_mask &= ~MASK_WATER;
+		}
+
+		tr = gi.trace (start, NULL, NULL, end, self, content_mask);
+
+		// see if we hit water
+		if (tr.contents & MASK_WATER)
+		{
+			int		color;
+
+			water = true;
+			VectorCopy (tr.endpos, water_start);
+
+			if (!VectorCompare (start, tr.endpos))
+			{
+				if (tr.contents & CONTENTS_WATER)
+				{
+					if (strcmp(tr.surface->name, "*brwater") == 0)
+						color = SPLASH_BROWN_WATER;
+					else
+						color = SPLASH_BLUE_WATER;
+				}
+				else if (tr.contents & CONTENTS_SLIME)
+					color = SPLASH_SLIME;
+				else if (tr.contents & CONTENTS_LAVA)
+					color = SPLASH_LAVA;
+				else
+					color = SPLASH_UNKNOWN;
+
+				if (color != SPLASH_UNKNOWN)
+				{
+					gi.WriteByte (svc_temp_entity);
+					gi.WriteByte (TE_SPLASH);
+					gi.WriteByte (8);
+					gi.WritePosition (tr.endpos);
+					gi.WriteDir (tr.plane.normal);
+					gi.WriteByte (color);
+					gi.multicast (tr.endpos, MULTICAST_PVS);
+				}
+
+				// change bullet's course when it enters water
+				VectorSubtract (end, start, dir);
+				vectoangles (dir, dir);
+				AngleVectors (dir, forward, right, up);
+				VectorMA (water_start, 8192, forward, end);
+			}
+
+			// re-trace ignoring water this time
+			tr = gi.trace (water_start, NULL, NULL, end, self, MASK_SHOT);
+		}
+	}
+
+	// send gun puff / flash
+	if (!((tr.surface) && (tr.surface->flags & SURF_SKY)))
+	{
+		if (tr.fraction < 1.0)
+		{
+			//if (isKill(tr.ent)) {
+			//	Com_Printf("Gamer Down\n");
+			//}
+			if (tr.ent->takedamage)
+			{
+				//Com_Printf("Gamer Down\n");
+				return true;
+			}
+			else
+			{
+				if (strncmp (tr.surface->name, "sky", 3) != 0)
+				{
+
+					if (self->client)
+						PlayerNoise(self, tr.endpos, PNOISE_IMPACT);
+				}
+			}
+		}
+		return false;
+	}
+
+	// if went through water, determine where the end and make a bubble trail
+	if (water)
+	{
+		vec3_t	pos;
+
+		VectorSubtract (tr.endpos, water_start, dir);
+		VectorNormalize (dir);
+		VectorMA (tr.endpos, -2, dir, pos);
+		if (gi.pointcontents (pos) & MASK_WATER)
+			VectorCopy (pos, tr.endpos);
+		else
+			tr = gi.trace (pos, NULL, NULL, water_start, tr.ent, MASK_WATER);
+
+		VectorAdd (water_start, tr.endpos, pos);
+		VectorScale (pos, 0.5, pos);
+
+		gi.WriteByte (svc_temp_entity);
+		gi.WriteByte (TE_BUBBLETRAIL);
+		gi.WritePosition (water_start);
+		gi.WritePosition (tr.endpos);
+		gi.multicast (pos, MULTICAST_PVS);
+	}
+
+}
+
+
+/*
+=================
 fire_lead
 
 This is an internal support routine used for bullet/pellet based weapons.
 =================
 */
+
+
+
 static void fire_lead (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int kick, int te_impact, int hspread, int vspread, int mod)
 {
 	trace_t		tr;
@@ -360,6 +484,8 @@ void blaster_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *
 	G_FreeEdict (self);
 }
 
+
+
 void fire_blaster (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, int effect, qboolean hyper)
 {
 	edict_t	*bolt;
@@ -404,6 +530,7 @@ void fire_blaster (edict_t *self, vec3_t start, vec3_t dir, int damage, int spee
 	{
 		VectorMA (bolt->s.origin, -10, dir, bolt->s.origin);
 		bolt->touch (bolt, tr.ent, NULL, NULL);
+		
 	}
 }	
 

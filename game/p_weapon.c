@@ -851,6 +851,10 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 
 		fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
 
+		/* If there is a kill, we ramp the score*/
+		if (fire_check(ent, start, forward)) {
+			Com_Printf("Gamer Down\n");
+		}
 
 		// send muzzle flash
 		gi.WriteByte(svc_muzzleflash);
@@ -866,9 +870,10 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 		if (!((int)dmflags->value & DF_INFINITE_AMMO))
 			ent->client->pers.inventory[ent->client->ammo_index]--;
 
+		
 
 	}
-	Com_Printf("ammo:%d\n", ent->client->pers.inventory[ent->client->ammo_index]);
+	//Com_Printf("ammo:%d\n", ent->client->pers.inventory[ent->client->ammo_index]);
 
 	PlayerNoise(ent, start, PNOISE_WEAPON);
 }

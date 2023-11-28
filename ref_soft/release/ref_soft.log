@@ -1,48 +1,48 @@
 ﻿  Performing Custom Build Tools
-  Microsoft (R) Macro Assembler Version 14.37.32824.0
+  Microsoft (R) Macro Assembler Version 14.37.32822.0
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-   Assembling: C:\Users\ahmed\repos\Game-Mod-Q2\ref_soft\r_aclipa.asm
+   Assembling: C:\Users\ahmed\Repos\Game-Mod-Q2\ref_soft\r_aclipa.asm
   Performing Custom Build Tools
-  Microsoft (R) Macro Assembler Version 14.37.32824.0
+  Microsoft (R) Macro Assembler Version 14.37.32822.0
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-   Assembling: C:\Users\ahmed\repos\Game-Mod-Q2\ref_soft\r_draw16.asm
+   Assembling: C:\Users\ahmed\Repos\Game-Mod-Q2\ref_soft\r_draw16.asm
   Performing Custom Build Tools
-  Microsoft (R) Macro Assembler Version 14.37.32824.0
+  Microsoft (R) Macro Assembler Version 14.37.32822.0
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-   Assembling: C:\Users\ahmed\repos\Game-Mod-Q2\ref_soft\r_drawa.asm
+   Assembling: C:\Users\ahmed\Repos\Game-Mod-Q2\ref_soft\r_drawa.asm
   Performing Custom Build Tools
-  Microsoft (R) Macro Assembler Version 14.37.32824.0
+  Microsoft (R) Macro Assembler Version 14.37.32822.0
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-   Assembling: C:\Users\ahmed\repos\Game-Mod-Q2\ref_soft\r_edgea.asm
+   Assembling: C:\Users\ahmed\Repos\Game-Mod-Q2\ref_soft\r_edgea.asm
   Performing Custom Build Tools
-  Microsoft (R) Macro Assembler Version 14.37.32824.0
+  Microsoft (R) Macro Assembler Version 14.37.32822.0
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-   Assembling: C:\Users\ahmed\repos\Game-Mod-Q2\ref_soft\r_polysa.asm
+   Assembling: C:\Users\ahmed\Repos\Game-Mod-Q2\ref_soft\r_polysa.asm
   Performing Custom Build Tools
-  Microsoft (R) Macro Assembler Version 14.37.32824.0
+  Microsoft (R) Macro Assembler Version 14.37.32822.0
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-   Assembling: C:\Users\ahmed\repos\Game-Mod-Q2\ref_soft\r_scana.asm
+   Assembling: C:\Users\ahmed\Repos\Game-Mod-Q2\ref_soft\r_scana.asm
   Performing Custom Build Tools
-  Microsoft (R) Macro Assembler Version 14.37.32824.0
+  Microsoft (R) Macro Assembler Version 14.37.32822.0
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-   Assembling: C:\Users\ahmed\repos\Game-Mod-Q2\ref_soft\r_spr8.asm
+   Assembling: C:\Users\ahmed\Repos\Game-Mod-Q2\ref_soft\r_spr8.asm
   Performing Custom Build Tools
-  Microsoft (R) Macro Assembler Version 14.37.32824.0
+  Microsoft (R) Macro Assembler Version 14.37.32822.0
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-   Assembling: C:\Users\ahmed\repos\Game-Mod-Q2\ref_soft\r_surf8.asm
+   Assembling: C:\Users\ahmed\Repos\Game-Mod-Q2\ref_soft\r_surf8.asm
   Performing Custom Build Tools
-  Microsoft (R) Macro Assembler Version 14.37.32824.0
+  Microsoft (R) Macro Assembler Version 14.37.32822.0
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-   Assembling: C:\Users\ahmed\repos\Game-Mod-Q2\ref_soft\r_varsa.asm
+   Assembling: C:\Users\ahmed\Repos\Game-Mod-Q2\ref_soft\r_varsa.asm
 C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(249,5): warning MSB8065: Custom build for item "r_aclipa.asm" succeeded, but specified output "c:\users\ahmed\repos\game-mod-q2\release\.obj" has not been created. This may cause incremental build to work incorrectly.
 C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(249,5): warning MSB8065: Custom build for item "r_draw16.asm" succeeded, but specified output "c:\users\ahmed\repos\game-mod-q2\release\.obj" has not been created. This may cause incremental build to work incorrectly.
 C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(249,5): warning MSB8065: Custom build for item "r_drawa.asm" succeeded, but specified output "c:\users\ahmed\repos\game-mod-q2\release\.obj" has not been created. This may cause incremental build to work incorrectly.
@@ -52,5 +52,15 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v17
 C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(249,5): warning MSB8065: Custom build for item "r_spr8.asm" succeeded, but specified output "c:\users\ahmed\repos\game-mod-q2\release\.obj" has not been created. This may cause incremental build to work incorrectly.
 C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(249,5): warning MSB8065: Custom build for item "r_surf8.asm" succeeded, but specified output "c:\users\ahmed\repos\game-mod-q2\release\.obj" has not been created. This may cause incremental build to work incorrectly.
 C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(249,5): warning MSB8065: Custom build for item "r_varsa.asm" succeeded, but specified output "c:\users\ahmed\repos\game-mod-q2\release\.obj" has not been created. This may cause incremental build to work incorrectly.
+  q_shwin.c
+  rw_ddraw.c
+  rw_dib.c
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\rw_dib.c(257,7): warning C4456: declaration of 'i' hides previous local declaration
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\rw_dib.c(220,9): message : see declaration of 'i'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\rw_dib.c(366,52): warning C4057: 'function': 'const COLORREF *' differs in indirection to slightly different base types from 'int [19]'
+  rw_imp.c
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\rw_imp.c(49,34): warning C4459: declaration of 'vid_fullscreen' hides global declaration
+C:\Users\ahmed\Repos\Game-Mod-Q2\ref_soft\r_local.h(575,16): message : see declaration of 'vid_fullscreen'
+  Generating Code...
 C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(1134,5): error MSB6006: "link.exe" exited with code 1181.
 LINK : fatal error LNK1181: cannot open input file '.\..\release\\.obj'

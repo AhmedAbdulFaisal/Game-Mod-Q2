@@ -1,2 +1,180 @@
-﻿win32\q2.rc(10): fatal error RC1015: cannot open include file 'afxres.h'.
+﻿  sv_ccmds.c
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(200,7): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(203,7): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(254,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(261,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(263,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(286,6): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(314,6): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(388,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(389,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(346,6): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(358,13): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(362,3): warning C4996: 'strncat': This function or variable may be unsafe. Consider using strncat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(445,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(417,6): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(539,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(616,6): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(804,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(813,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(928,17): warning C4057: 'function': 'byte *' differs in indirection to slightly different base types from 'char [32768]'
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ccmds.c(915,17): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  sv_ents.c
+  sv_game.c
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_game.c(70,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_game.c(98,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_game.c(126,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_game.c(148,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_game.c(201,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  sv_init.c
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_init.c(49,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_init.c(130,6): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_init.c(195,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_init.c(203,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_init.c(209,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_init.c(222,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_init.c(223,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_init.c(198,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_init.c(406,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_init.c(427,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_init.c(434,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  sv_main.c
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_main.c(118,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_main.c(119,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_main.c(132,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_main.c(296,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_main.c(397,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_main.c(445,83): warning C4152: nonstandard extension, function/data pointer conversion in expression
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_main.c(457,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_main.c(458,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_main.c(907,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  sv_send.c
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_send.c(74,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_send.c(104,8): warning C4456: declaration of 'i' hides previous local declaration
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_send.c(94,8): message : see declaration of 'i'
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_send.c(97,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_send.c(140,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  sv_user.c
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_user.c(578,4): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  sv_world.c
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_world.c(224,9): warning C4456: declaration of 'i' hides previous local declaration
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_world.c(171,8): message : see declaration of 'i'
+  cd_win.c
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\cd_win.c(377,13): warning C4389: '!=': signed/unsigned mismatch
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\cd_win.c(375,45): warning C4100: 'uMsg': unreferenced formal parameter
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\cd_win.c(375,34): warning C4100: 'hWnd': unreferenced formal parameter
+  conproc.c
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(160,38): warning C4100: 'arg': unreferenced formal parameter
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(223,32): warning C4459: declaration of 'hfileBuffer' hides global declaration
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(41,8): message : see declaration of 'hfileBuffer'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(268,12): warning C4244: '=': conversion from 'int' to 'SHORT', possible loss of data
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(299,11): warning C4244: '=': conversion from 'int' to 'char', possible loss of data
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(305,41): warning C4244: '=': conversion from 'int' to 'WORD', possible loss of data
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(335,10): warning C4244: '=': conversion from 'int' to 'char', possible loss of data
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(356,28): warning C4459: declaration of 'hStdout' hides global declaration
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(44,8): message : see declaration of 'hStdout'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(376,31): warning C4244: '=': conversion from 'int' to 'SHORT', possible loss of data
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(383,19): warning C4244: '=': conversion from 'int' to 'SHORT', possible loss of data
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(390,19): warning C4244: '=': conversion from 'int' to 'SHORT', possible loss of data
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(404,27): warning C4244: '=': conversion from 'int' to 'SHORT', possible loss of data
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(413,19): warning C4244: '=': conversion from 'int' to 'SHORT', possible loss of data
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(420,19): warning C4244: '=': conversion from 'int' to 'SHORT', possible loss of data
+  in_win.c
+  net_wins.c
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(220,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(201,3): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(202,3): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(203,3): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(204,3): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(205,3): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(206,3): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(207,3): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(208,3): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(209,3): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(210,3): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(211,3): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(290,54): warning C4459: declaration of 'net_from' hides global declaration
+C:\Users\ahmed\Repos\Game-Mod-Q2\qcommon\qcommon.h(599,17): message : see declaration of 'net_from'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(290,75): warning C4459: declaration of 'net_message' hides global declaration
+C:\Users\ahmed\Repos\Game-Mod-Q2\qcommon\qcommon.h(600,18): message : see declaration of 'net_message'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(315,74): warning C4100: 'to': unreferenced formal parameter
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(331,50): warning C4459: declaration of 'net_from' hides global declaration
+C:\Users\ahmed\Repos\Game-Mod-Q2\qcommon\qcommon.h(599,17): message : see declaration of 'net_from'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(331,71): warning C4459: declaration of 'net_message' hides global declaration
+C:\Users\ahmed\Repos\Game-Mod-Q2\qcommon\qcommon.h(600,18): message : see declaration of 'net_message'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(354,42): warning C4057: 'function': 'char *' differs in indirection to slightly different base types from 'byte *'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(484,39): warning C4133: 'function': incompatible types - from 'qboolean *' to 'u_long *'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(497,46): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _stricmp. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(529,7): warning C4459: declaration of 'dedicated' hides global declaration
+C:\Users\ahmed\Repos\Game-Mod-Q2\qcommon\qcommon.h(754,16): message : see declaration of 'dedicated'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(593,39): warning C4057: 'function': 'u_long *' differs in indirection to slightly different base types from 'int *'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(633,7): warning C4459: declaration of 'dedicated' hides global declaration
+C:\Users\ahmed\Repos\Game-Mod-Q2\qcommon\qcommon.h(754,16): message : see declaration of 'dedicated'
+  q_shwin.c
+  snd_win.c
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\snd_win.c(382,75): warning C4152: nonstandard extension, function/data pointer conversion in expression
+  sys_win.c
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(76,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(163,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(164,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(165,7): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(234,7): warning C4996: 'GetVersionExA': was declared deprecated
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(277,47): warning C4057: 'function': 'LPDWORD' differs in indirection to slightly different base types from 'int *'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(283,42): warning C4057: 'function': 'LPDWORD' differs in indirection to slightly different base types from 'int *'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(298,37): warning C4057: 'function': 'LPDWORD' differs in indirection to slightly different base types from 'int *'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(312,39): warning C4057: 'function': 'LPDWORD' differs in indirection to slightly different base types from 'int *'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(321,36): warning C4057: 'function': 'LPDWORD' differs in indirection to slightly different base types from 'int *'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(359,47): warning C4057: 'function': 'LPDWORD' differs in indirection to slightly different base types from 'int *'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(362,45): warning C4057: 'function': 'LPDWORD' differs in indirection to slightly different base types from 'int *'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(365,53): warning C4057: 'function': 'LPDWORD' differs in indirection to slightly different base types from 'int *'
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(415,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(538,66): warning C4152: nonstandard extension, function/data pointer conversion in expression
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(655,3): warning C4996: '_controlfp': This function or variable may be unsafe. Consider using _controlfp_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\sys_win.c(594,88): warning C4100: 'nCmdShow': unreferenced formal parameter
+  vid_dll.c
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_dll.c(123,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_dll.c(148,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_dll.c(441,83): warning C4210: nonstandard extension used: function given file scope
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_dll.c(512,45): warning C4100: 'y': unreferenced formal parameter
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_dll.c(512,38): warning C4100: 'x': unreferenced formal parameter
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_dll.c(594,76): warning C4152: nonstandard extension, function/data pointer conversion in expression
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_dll.c(605,46): warning C4152: nonstandard extension, function/data pointer conversion in expression
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_dll.c(740,2): warning C4996: 'putenv': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _putenv. See online help for details.
+  vid_menu.c
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_menu.c(72,35): warning C4100: 'unused': unreferenced formal parameter
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_menu.c(105,7): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _stricmp. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_menu.c(113,34): warning C4100: 'unused': unreferenced formal parameter
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_menu.c(170,7): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _stricmp. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_menu.c(175,9): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _stricmp. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_menu.c(184,5): warning C4996: 'putenv': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _putenv. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_menu.c(186,5): warning C4996: 'putenv': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _putenv. See online help for details.
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_menu.c(118,33): warning C4100: 'unused': unreferenced formal parameter
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_menu.c(201,31): warning C4210: nonstandard extension used: function given file scope
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\vid_menu.c(199,34): warning C4100: 'unused': unreferenced formal parameter
+  Generating Code...
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\snd_win.c(692): warning C4701: potentially uninitialized local variable 's' used
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(124): warning C4715: 'NET_CompareAdr': not all control paths return a value
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(154): warning C4715: 'NET_CompareBaseAdr': not all control paths return a value
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(235): warning C4706: assignment within conditional expression
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\net_wins.c(427): warning C4701: potentially uninitialized local variable 'net_socket' used
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\in_win.c(574): warning C4715: 'RawValuePointer': not all control paths return a value
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\in_win.c(520): warning C4701: potentially uninitialized local variable 'mmr' used
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(116): warning C4701: potentially uninitialized local variable 'hFile' used
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(116): warning C4703: potentially uninitialized local pointer variable 'hFile' used
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(116): warning C4701: potentially uninitialized local variable 'heventParent' used
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(116): warning C4703: potentially uninitialized local pointer variable 'heventParent' used
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(116): warning C4701: potentially uninitialized local variable 'heventChild' used
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\conproc.c(116): warning C4703: potentially uninitialized local pointer variable 'heventChild' used
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\cd_win.c(62): warning C4706: assignment within conditional expression
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\cd_win.c(53): warning C4706: assignment within conditional expression
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\cd_win.c(202): warning C4706: assignment within conditional expression
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\cd_win.c(222): warning C4706: assignment within conditional expression
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\cd_win.c(449): warning C4706: assignment within conditional expression
+C:\Users\ahmed\Repos\Game-Mod-Q2\win32\cd_win.c(458): warning C4706: assignment within conditional expression
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_game.c(102): warning C4701: potentially uninitialized local variable 'n' used
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ents.c(171): warning C4701: potentially uninitialized local variable 'newent' used
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ents.c(171): warning C4703: potentially uninitialized local pointer variable 'newent' used
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ents.c(171): warning C4701: potentially uninitialized local variable 'oldent' used
+C:\Users\ahmed\Repos\Game-Mod-Q2\server\sv_ents.c(171): warning C4703: potentially uninitialized local pointer variable 'oldent' used
+win32\q2.rc(10): fatal error RC1015: cannot open include file 'afxres.h'.
   

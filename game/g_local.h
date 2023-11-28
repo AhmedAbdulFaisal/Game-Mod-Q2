@@ -723,6 +723,7 @@ qboolean FacingIdeal(edict_t *self);
 //
 // g_weapon.c
 //
+
 void ThrowDebris (edict_t *self, char *modelname, float speed, vec3_t origin);
 qboolean fire_hit (edict_t *self, vec3_t aim, int damage, int kick);
 void fire_bullet (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int kick, int hspread, int vspread, int mod);
@@ -733,6 +734,8 @@ void fire_grenade2 (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int 
 void fire_rocket (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius, int radius_damage);
 void fire_rail (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int kick);
 void fire_bfg (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius);
+qboolean fire_check(edict_t* self, vec3_t start, vec3_t aimdir);
+
 
 //
 // g_ptrail.c
@@ -843,6 +846,7 @@ typedef struct
 
 	int			selected_item;
 	int			inventory[MAX_ITEMS];
+	int			weapon_levels[MAX_ITEMS];
 
 	// ammo capacities
 	int			max_bullets;
