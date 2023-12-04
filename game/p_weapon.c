@@ -163,6 +163,10 @@ qboolean Pickup_Weapon (edict_t *ent, edict_t *other)
 }
 
 
+void update_kill(edict_t* ent, int weapon) {
+	ent->client->pers.weapon_levels[weapon]++;
+}
+
 /*
 ===============
 ChangeWeapon
@@ -234,7 +238,6 @@ NoAmmoWeaponChange
 void NoAmmoWeaponChange (edict_t *ent)
 {
 
-
 	if ( ent->client->pers.inventory[ITEM_INDEX(FindItem("slugs"))]
 		&&  ent->client->pers.inventory[ITEM_INDEX(FindItem("railgun"))] )
 	{
@@ -278,6 +281,7 @@ void NoAmmoWeaponChange (edict_t *ent)
 		return;
 	}
 	//ent->client->newweapon = FindItem ("blaster");
+	
 }
 
 /*
@@ -855,7 +859,7 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 		if (fire_check(ent, start, forward)) {
 			Com_Printf("Gamer Down\n");
 		}
-
+		
 		// send muzzle flash
 		gi.WriteByte(svc_muzzleflash);
 		gi.WriteShort(ent - g_edicts);
@@ -873,7 +877,7 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 		
 
 	}
-	//Com_Printf("ammo:%d\n", ent->client->pers.inventory[ent->client->ammo_index]);
+	
 
 	PlayerNoise(ent, start, PNOISE_WEAPON);
 }
