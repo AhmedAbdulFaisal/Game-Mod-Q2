@@ -162,7 +162,11 @@ qboolean Pickup_Weapon (edict_t *ent, edict_t *other)
 	return true;
 }
 
-
+/*
+* Weap
+* 
+* 
+*/
 void update_kill(edict_t* ent, int weapon) {
 	ent->client->pers.weapon_levels[weapon]++;
 }
@@ -817,6 +821,8 @@ void Weapon_RocketLauncher (edict_t *ent)
 }
 
 
+
+
 /*
 ======================================================================
 
@@ -824,7 +830,11 @@ BLASTER / HYPERBLASTER
 
 ======================================================================
 */
+/* 
+Blaster Level up index is 0. 
 
+
+*/
 void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, int effect)
 {
 	vec3_t	forward, right;
@@ -842,9 +852,9 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 		NoAmmoWeaponChange(ent);
 	}
 	else {
-
 		if (is_quad)
 			damage *= 4;
+
 		AngleVectors(ent->client->v_angle, forward, right, NULL);
 		VectorSet(offset, 24, 8, ent->viewheight - 8);
 		VectorAdd(offset, g_offset, offset);
@@ -852,13 +862,32 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 
 		VectorScale(forward, -2, ent->client->kick_origin);
 		ent->client->kick_angles[0] = -1;
+		
+		if (ent->client->pers.weapon_levels[0] >= 0 && ent->client->pers.weapon_levels[0] <= 10) {
+			damage *= 1;
+		}
+		else if (ent->client->pers.weapon_levels[0] >= 10 && ent->client->pers.weapon_levels[0] <= 20) {
+			damage *= 2;	
+		}
+		else if (ent->client->pers.weapon_levels[0] >= 20 && ent->client->pers.weapon_levels[0] <= 30) {
+			damage *= 3;
+		}
+		
+		//if (ent->takedamage) {
+		//	Com_Printf("You have lost your damage streak\n");
+		//	ent->client->pers.weapon_levels[0] = 0;
+		//}
 
 		fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
 
-		/* If there is a kill, we ramp the score*/
-		if (fire_check(ent, start, forward)) {
-			Com_Printf("Gamer Down\n");
+		/* If there is damage, we ramp the score*/
+		if (fire_check(ent, start, forward) && ent->client->pers.weapon_levels[0] <= 30) {
+			update_kill(ent, 0);
+			Com_Printf("Pistol XP: %d \n", ent->client->pers.weapon_levels[0]);
 		}
+
+		//Com_Printf("Taking Damage: %d \n", ent.taked);
+		//Com_Printf("Damage: %d \n", damage);
 		
 		// send muzzle flash
 		gi.WriteByte(svc_muzzleflash);
@@ -944,6 +973,11 @@ void Weapon_HyperBlaster_Fire (edict_t *ent)
 			else
 				damage = 20;
 			Blaster_Fire (ent, offset, damage, true, effect);
+
+
+
+
+
 			if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
 				ent->client->pers.inventory[ent->client->ammo_index]--;
 
@@ -998,6 +1032,7 @@ void Machinegun_Fire (edict_t *ent)
 	int			damage = 8;
 	int			kick = 1;
 	vec3_t		offset;
+	int			total_shots = 3;
 
 	if (!(ent->client->buttons & BUTTON_ATTACK))
 	{
@@ -1029,6 +1064,18 @@ void Machinegun_Fire (edict_t *ent)
 		kick *= 4;
 	}
 
+	/* Levels for Machinegun */
+	if (ent->client->pers.weapon_levels[1] >= 0 && ent->client->pers.weapon_levels[1] <= 10) {
+		damage *= 1;
+	}
+	else if (ent->client->pers.weapon_levels[1] >= 10 && ent->client->pers.weapon_levels[1] <= 20) {
+		damage *= 2;
+	}
+	else if (ent->client->pers.weapon_levels[1] >= 20 && ent->client->pers.weapon_levels[1] <= 30) {
+		damage *= 3;
+	}
+
+	/* 
 	for (i=1 ; i<3 ; i++)
 	{
 		ent->client->kick_origin[i] = crandom() * 0.35;
@@ -1041,16 +1088,23 @@ void Machinegun_Fire (edict_t *ent)
 	if (!deathmatch->value)
 	{
 		ent->client->machinegun_shots++;
-		if (ent->client->machinegun_shots > 3)
-			ent->client->machinegun_shots = 3;
+		if (ent->client->machinegun_shots > total_shots)
+			ent->client->machinegun_shots = total_shots;
 	}
-
+	*/
 	// get start / end positions
 	VectorAdd (ent->client->v_angle, ent->client->kick_angles, angles);
 	AngleVectors (angles, forward, right, NULL);
 	VectorSet(offset, 0, 8, ent->viewheight-8);
 	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
 	fire_bullet (ent, start, forward, damage, kick, DEFAULT_BULLET_HSPREAD, DEFAULT_BULLET_VSPREAD, MOD_MACHINEGUN);
+
+	/* Level Up Code */
+	if (fire_check(ent, start, forward) && ent->client->pers.weapon_levels[1] <= 30) {
+		update_kill(ent, 1);
+	}
+	Com_Printf("MachineGun XP: %d \n", ent->client->pers.weapon_levels[1]);
+	Com_Printf("Damage: %d \n", damage);
 
 	gi.WriteByte (svc_muzzleflash);
 	gi.WriteShort (ent-g_edicts);
@@ -1188,6 +1242,7 @@ void Chaingun_Fire (edict_t *ent)
 		P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
 
 		fire_bullet (ent, start, forward, damage, kick, DEFAULT_BULLET_HSPREAD, DEFAULT_BULLET_VSPREAD, MOD_CHAINGUN);
+
 	}
 
 	// send muzzle flash
@@ -1227,6 +1282,8 @@ void weapon_shotgun_fire (edict_t *ent)
 	vec3_t		offset;
 	int			damage = 4;
 	int			kick = 8;
+	int			hspread = 500;
+	int			vspread = 500;
 
 	if (ent->client->ps.gunframe == 9)
 	{
@@ -1248,10 +1305,32 @@ void weapon_shotgun_fire (edict_t *ent)
 		kick *= 4;
 	}
 
+	if (ent->client->pers.weapon_levels[2] >= 0 && ent->client->pers.weapon_levels[2] <= 10) {
+		damage *= 1;
+		hspread = 500;
+		vspread = 500;
+	}
+	else if (ent->client->pers.weapon_levels[2] >= 10 && ent->client->pers.weapon_levels[2] <= 20) {
+		damage *= 2;
+		hspread = 700;
+		vspread = 700;
+	}
+	else if (ent->client->pers.weapon_levels[2] >= 20 && ent->client->pers.weapon_levels[2] <= 30) {
+		damage *= 3;
+		hspread = 1000;
+		vspread = 1000;
+	}
+
 	if (deathmatch->value)
-		fire_shotgun (ent, start, forward, damage, kick, 500, 500, DEFAULT_DEATHMATCH_SHOTGUN_COUNT, MOD_SHOTGUN);
+		fire_shotgun (ent, start, forward, damage, kick, hspread, vspread, DEFAULT_DEATHMATCH_SHOTGUN_COUNT, MOD_SHOTGUN);
 	else
-		fire_shotgun (ent, start, forward, damage, kick, 500, 500, DEFAULT_SHOTGUN_COUNT, MOD_SHOTGUN);
+		fire_shotgun (ent, start, forward, damage, kick, hspread, vspread, DEFAULT_SHOTGUN_COUNT, MOD_SHOTGUN);
+
+
+	if (fire_check(ent, start, forward) && ent->client->pers.weapon_levels[2] <= 30) {
+		update_kill(ent, 2);
+		Com_Printf("Shotgun XP: %d \n", ent->client->pers.weapon_levels[2]);
+	}
 
 	// send muzzle flash
 	gi.WriteByte (svc_muzzleflash);
@@ -1306,6 +1385,12 @@ void weapon_supershotgun_fire (edict_t *ent)
 	v[YAW]   = ent->client->v_angle[YAW] + 5;
 	AngleVectors (v, forward, NULL, NULL);
 	fire_shotgun (ent, start, forward, damage, kick, DEFAULT_SHOTGUN_HSPREAD, DEFAULT_SHOTGUN_VSPREAD, DEFAULT_SSHOTGUN_COUNT/2, MOD_SSHOTGUN);
+
+
+	if (fire_check(ent, start, forward) && ent->client->pers.weapon_levels[3] <= 30) {
+		update_kill(ent, 3);
+		Com_Printf("Shotgun XP: %d \n", ent->client->pers.weapon_levels[3]);
+	}
 
 	// send muzzle flash
 	gi.WriteByte (svc_muzzleflash);

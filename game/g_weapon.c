@@ -217,7 +217,7 @@ qboolean fire_check(edict_t* self, vec3_t start, vec3_t aimdir) {
 			//}
 			if (tr.ent->takedamage)
 			{
-				//Com_Printf("Gamer Down\n");
+				Com_Printf("ENEMY DAMAGE:%d\n",tr.ent->takedamage);
 				return true;
 			}
 			else

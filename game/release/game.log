@@ -1,5 +1,6 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
   p_weapon.c
-C:\Users\ahmed\repos\Game-Mod-Q2\game\p_weapon.c(824,27): warning C4100: 'ent': unreferenced formal parameter
+C:\Users\ahmed\Repos\Game-Mod-Q2\game\p_weapon.c(1035,8): warning C4189: 'total_shots': local variable is initialized but not referenced
+C:\Users\ahmed\Repos\Game-Mod-Q2\game\p_weapon.c(1028,6): warning C4101: 'i': unreferenced local variable
      Creating library .\..\release\gamex86.lib and object .\..\release\gamex86.exp
-  game.vcxproj -> C:\Users\ahmed\repos\Game-Mod-Q2\game\release\gamex86.dll
+  game.vcxproj -> C:\Users\ahmed\Repos\Game-Mod-Q2\game\release\gamex86.dll
