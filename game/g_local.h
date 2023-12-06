@@ -845,6 +845,7 @@ typedef struct
 	int			savedFlags;
 
 	int			selected_item;
+	int			current_weapon;
 	int			inventory[MAX_ITEMS];
 	int			weapon_levels[MAX_ITEMS];
 
