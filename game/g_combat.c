@@ -519,6 +519,8 @@ void T_Damage (edict_t *targ, edict_t *inflictor, edict_t *attacker, vec3_t dir,
 	{
 
 		//add level up code here or something
+		Com_Printf("Lmao you got damaged, you lost all your fucking levels dumbass lmao:\n");
+		targ->client->pers.weapon_levels[targ->client->ammo_index] = 0;
 
 		if (!(targ->flags & FL_GODMODE) && (take))
 			targ->pain (targ, attacker, knockback, take);

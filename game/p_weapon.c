@@ -863,13 +863,13 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 		VectorScale(forward, -2, ent->client->kick_origin);
 		ent->client->kick_angles[0] = -1;
 		
-		if (ent->client->pers.weapon_levels[0] >= 0 && ent->client->pers.weapon_levels[0] <= 10) {
+		if (ent->client->pers.weapon_levels[ent->client->ammo_index] >= 0 && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 10) {
 			damage *= 1;
 		}
-		else if (ent->client->pers.weapon_levels[0] >= 10 && ent->client->pers.weapon_levels[0] <= 20) {
+		else if (ent->client->pers.weapon_levels[ent->client->ammo_index] >= 10 && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 20) {
 			damage *= 2;	
 		}
-		else if (ent->client->pers.weapon_levels[0] >= 20 && ent->client->pers.weapon_levels[0] <= 30) {
+		else if (ent->client->pers.weapon_levels[ent->client->ammo_index] >= 20 && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 30) {
 			damage *= 3;
 		}
 		
@@ -881,9 +881,9 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 		fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
 
 		/* If there is damage, we ramp the score*/
-		if (fire_check(ent, start, forward) && ent->client->pers.weapon_levels[0] <= 30) {
-			update_kill(ent, 0);
-			Com_Printf("Pistol XP: %d \n", ent->client->pers.weapon_levels[0]);
+		if (fire_check(ent, start, forward) && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 30) {
+			update_kill(ent, ent->client->ammo_index);
+			Com_Printf("Pistol XP: %d \n", ent->client->pers.weapon_levels[ent->client->ammo_index]);
 		}
 
 		//Com_Printf("Taking Damage: %d \n", ent.taked);
@@ -898,7 +898,7 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 			gi.WriteByte(MZ_BLASTER | is_silenced);
 		gi.multicast(ent->s.origin, MULTICAST_PVS);
 
-
+		//Com_Printf("AMMO INDEX %d \n", ent->client->ammo_index);
 
 		if (!((int)dmflags->value & DF_INFINITE_AMMO))
 			ent->client->pers.inventory[ent->client->ammo_index]--;
@@ -1063,13 +1063,13 @@ void Machinegun_Fire (edict_t *ent)
 	}
 
 	/* Levels for Machinegun */
-	if (ent->client->pers.weapon_levels[1] >= 0 && ent->client->pers.weapon_levels[1] <= 10) {
+	if (ent->client->pers.weapon_levels[ent->client->ammo_index] >= 0 && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 10) {
 		damage *= 1;
 	}
-	else if (ent->client->pers.weapon_levels[1] >= 10 && ent->client->pers.weapon_levels[1] <= 20) {
+	else if (ent->client->pers.weapon_levels[ent->client->ammo_index] >= 10 && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 20) {
 		damage *= 2;
 	}
-	else if (ent->client->pers.weapon_levels[1] >= 20 && ent->client->pers.weapon_levels[1] <= 30) {
+	else if (ent->client->pers.weapon_levels[ent->client->ammo_index] >= 20 && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 30) {
 		damage *= 3;
 	}
 
@@ -1098,11 +1098,11 @@ void Machinegun_Fire (edict_t *ent)
 	fire_bullet (ent, start, forward, damage, kick, DEFAULT_BULLET_HSPREAD, DEFAULT_BULLET_VSPREAD, MOD_MACHINEGUN);
 
 	/* Level Up Code */
-	if (fire_check(ent, start, forward) && ent->client->pers.weapon_levels[1] <= 30) {
-		update_kill(ent, 1);
+	if (fire_check(ent, start, forward) && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 30) {
+		update_kill(ent, ent->client->ammo_index);
 	}
-	Com_Printf("MachineGun XP: %d \n", ent->client->pers.weapon_levels[1]);
-	Com_Printf("Damage: %d \n", damage);
+	Com_Printf("MachineGun XP: %d \n", ent->client->pers.weapon_levels[ent->client->ammo_index]);
+	Com_Printf("MachineGun Damage: %d \n", damage);
 
 	gi.WriteByte (svc_muzzleflash);
 	gi.WriteShort (ent-g_edicts);
@@ -1110,6 +1110,8 @@ void Machinegun_Fire (edict_t *ent)
 	gi.multicast (ent->s.origin, MULTICAST_PVS);
 
 	PlayerNoise(ent, start, PNOISE_WEAPON);
+	//Com_Printf("AMMO INDEX %d \n", ent->client->ammo_index);
+
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
 		ent->client->pers.inventory[ent->client->ammo_index]--;
