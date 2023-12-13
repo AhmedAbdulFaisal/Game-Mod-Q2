@@ -547,6 +547,12 @@ void player_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damag
 	self->client->enviro_framenum = 0;
 	self->flags &= ~FL_POWER_ARMOR;
 
+
+	if (Jet_Active(self)) {
+		Jet_BecomeExplosion(self, damage);
+		self->client->jet_framenum = 0;
+	}
+
 	if (self->health < -40)
 	{	// gib
 		gi.sound (self, CHAN_BODY, gi.soundindex ("misc/udeath.wav"), 1, ATTN_NORM, 0);
@@ -1610,6 +1616,9 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 			client->ps.pmove.pm_type = PM_NORMAL;
 
 		client->ps.pmove.gravity = sv_gravity->value;
+		if (Jet_Active(ent)) {
+			Jet_ApplyJet(ent, ucmd);
+		}
 		pm.s = client->ps.pmove;
 
 		for (i=0 ; i<3 ; i++)
@@ -1639,6 +1648,9 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		for (i=0 ; i<3 ; i++)
 		{
 			ent->s.origin[i] = pm.s.origin[i]*0.125;
+			if (!Jet_Active(ent) || (Jet_Active(ent) && (fabs((float)pm.s.velocity[i] * 0.125) < fabs(ent->velocity[i])))) {
+
+			}
 			ent->velocity[i] = pm.s.velocity[i]*0.125;
 		}
 
@@ -1648,6 +1660,13 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		client->resp.cmd_angles[0] = SHORT2ANGLE(ucmd->angles[0]);
 		client->resp.cmd_angles[1] = SHORT2ANGLE(ucmd->angles[1]);
 		client->resp.cmd_angles[2] = SHORT2ANGLE(ucmd->angles[2]);
+
+		if (Jet_Active(ent)) {
+			if (pm.groundentity) {
+				if (Jet_AvoidGround(ent))	/*then lift us if possible*/
+					pm.groundentity = NULL;
+			}
+		}
 
 		if (ent->groundentity && !pm.groundentity && (pm.cmd.upmove >= 10) && (pm.waterlevel == 0))
 		{
@@ -1661,6 +1680,7 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		ent->groundentity = pm.groundentity;
 		if (pm.groundentity)
 			ent->groundentity_linkcount = pm.groundentity->linkcount;
+
 
 		if (ent->deadflag)
 		{
@@ -1721,6 +1741,8 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 			Think_Weapon (ent);
 		}
 	}
+
+
 
 	if (client->resp.spectator) {
 		if (ucmd->upmove >= 10) {

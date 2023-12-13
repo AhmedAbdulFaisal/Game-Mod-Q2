@@ -54,6 +54,22 @@ static int	quad_drop_timeout_hack;
 
 //======================================================================
 
+/* Method for jet logic */
+void Use_Jet(edict_t* ent, gitem_t* item) {
+	ValidateSelectedItem(ent);
+	if (ent->client->jet_remaining == 0) {
+		ent->client->jet_remaining = 700;
+	}
+	if (Jet_Active(ent)) {
+		ent->client->jet_framenum = 0;
+	}
+	else {
+		ent->client->jet_framenum = level.framenum + ent->client->jet_remaining;
+	}
+	gi.sound(ent, CHAN_ITEM, gi.soundindex("items/protect.wav"), 0.8, ATTN_NORM, 0);
+	gi.sound(ent, CHAN_AUTO, gi.soundindex("hover/hovidle1.wav"), 0.8, ATTN_NORM, 0);
+}
+
 /*
 ===============
 GetItemByIndex
@@ -168,6 +184,23 @@ qboolean Pickup_Powerup (edict_t *ent, edict_t *other)
 		return false;
 
 	other->client->pers.inventory[ITEM_INDEX(ent->item)]++;
+
+
+	/* Jetpack code */
+	if (Q_stricmp(ent->item->pickup_name, "Jetpack") == 0) {
+		other->client->pers.inventory[ITEM_INDEX(ent->item)] = 1;
+		other->client->jet_remaining = 700;
+
+		if ((int)dmflags->value & DF_INSTANT_ITEMS) {
+			other->client->jet_framenum = 0;
+		}
+		else {
+			if (Jet_Active(other)) {
+				other->client->jet_framenum = level.framenum + other->client->jet_remaining;
+			}
+		}
+	}
+
 
 	if (deathmatch->value)
 	{
@@ -1754,19 +1787,49 @@ always owned, never in the world
 /* precache */ "items/airout.wav"
 	},
 
-/*QUAKED item_enviro (.3 .3 1) (-16 -16 -16) (16 16 16)
+/* Jetpack item which i totally did not take from quake 2 tutorials 
+This is a jetpack which replaces the envirosuit
+
 */
+
+/*item_jet (.3 .3 1) (-16 - 16 - 16) (16 16 16) */
+//	{
+//		"item_enviro",
+//		Pickup_Powerup,
+//		Use_Jet,
+//		Drop_General,
+//		NULL,
+//		"items/pkup.wav"
+//		"models/monsters/hover/tris.md2",EF_ROTATE,
+//		NULL,
+//			"p_envirosuit",
+//			"Jetpack",
+//			2,
+//		60,
+//		NULL,
+//		IT_STAY_COOP|IT_POWERUP,
+//		0,
+//		NULL,
+//		0,
+//		"hover/hovidle1.wav items/damage.wav items/damage2.wav items/damage3.wav"
+//	},
+
+
+/*QUAKED item_enviro (.3 .3 1) (-16 -16 -16) (16 16 16)
+It's called a shitty jetpack cause it fucking sucks ass lmfao
+*/
+
 	{
 		"item_enviro",
 		Pickup_Powerup,
-		Use_Envirosuit,
+		Use_Jet,
 		Drop_General,
 		NULL,
 		"items/pkup.wav",
 		"models/items/enviro/tris.md2", EF_ROTATE,
 		NULL,
 /* icon */		"p_envirosuit",
-/* pickup */	"Environment Suit",
+/* pickup */	"Shitty Jetpack",
 /* width */		2,
 		60,
 		NULL,
@@ -1776,6 +1839,7 @@ always owned, never in the world
 		0,
 /* precache */ "items/airout.wav"
 	},
+
 
 /*QUAKED item_ancient_head (.3 .3 1) (-16 -16 -16) (16 16 16)
 Special item that gives +2 to maximum health

@@ -440,7 +440,32 @@ void SV_CalcBlend (edict_t *ent)
 		SV_AddBlend (0.5, 0.3, 0.2, 0.4, ent->client->ps.blend);
 
 	// add for powerups
-	if (ent->client->quad_framenum > level.framenum)
+	if (Jet_Active(ent)) {
+		if (ent->flags & FL_GODMODE) {
+			ent->client->jet_framenum = level.framenum + 700;
+
+		}
+		ent->client->jet_remaining = ent->client->jet_framenum - level.framenum;
+
+		if ((int)ent->client->jet_remaining == 0) {
+			ent->client->pers.inventory[ITEM_INDEX(FindItem("Jetpack"))] = 0;
+		}
+		if (((int)ent->client->jet_remaining % 6) == 0) {
+			gi.sound(ent, CHAN_AUTO, gi.soundindex("hover/hovidle1.wav"), 0.9, ATTN_NORM, 0);
+
+		}
+
+		if (ent->client->jet_remaining <= 40) {
+			if (((int)ent->client->jet_remaining % 10) == 0) {
+				gi.sound(ent, CHAN_ITEM, gi.soundindex("items/protect.wav"), 1, ATTN_NORM, 0);
+
+			}
+		}
+		if (ent->client->jet_remaining > 40 || (int)ent->client->jet_remaining & 4) {
+			//SV_AddBlend(0, 0, 1, 0.88, ent->client->ps.blend);
+		}
+
+	}else if (ent->client->quad_framenum > level.framenum)
 	{
 		remaining = ent->client->quad_framenum - level.framenum;
 		if (remaining == 30)	// beginning to fade
@@ -622,6 +647,7 @@ void P_WorldEffects (void)
 		gi.sound (current_player, CHAN_BODY, gi.soundindex("player/watr_out.wav"), 1, ATTN_NORM, 0);
 		current_player->flags &= ~FL_INWATER;
 	}
+
 
 	//
 	// check for head just going under water

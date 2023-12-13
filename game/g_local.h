@@ -596,6 +596,19 @@ extern	field_t fields[];
 extern	gitem_t	itemlist[];
 
 
+
+//
+// jet.c
+//
+qboolean Jet_AvoidGround(edict_t* ent);
+qboolean Jet_Active(edict_t* ent);
+void Jet_BecomeExplosion(edict_t* ent, int damage);
+void Jet_ApplyLifting(edict_t* ent);
+void Jet_ApplySparks(edict_t* ent);
+void Jet_ApplyRolling(edict_t* ent, vec3_t right);
+void Jet_ApplyJet(edict_t* ent, usercmd_t* ucmd);
+
+
 //
 // g_cmds.c
 //
@@ -948,6 +961,10 @@ struct gclient_s
 	float		invincible_framenum;
 	float		breather_framenum;
 	float		enviro_framenum;
+
+	float		jet_framenum;
+	float		jet_remaining;
+	float		jet_next_think;
 
 	qboolean	grenade_blew_up;
 	float		grenade_time;

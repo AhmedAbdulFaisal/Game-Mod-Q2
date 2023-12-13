@@ -43,6 +43,10 @@ void MoveClientToIntermission (edict_t *ent)
 	ent->client->ps.blend[3] = 0;
 	ent->client->ps.rdflags &= ~RDF_UNDERWATER;
 
+
+	ent->client->jet_framenum = 0;
+	ent->client->jet_remaining = 0;
+
 	// clean up powerup info
 	ent->client->quad_framenum = 0;
 	ent->client->invincible_framenum = 0;
@@ -446,8 +450,11 @@ void G_SetStats (edict_t *ent)
 	//
 	// timers
 	//
-	if (ent->client->quad_framenum > level.framenum)
-	{
+	if (Jet_Active(ent)) {
+		ent->client->ps.stats[STAT_TIMER_ICON] = gi.imageindex("p_envirosuit");
+		ent->client->ps.stats[STAT_TIMER] = ent->client->jet_remaining / 10;
+	
+	}else if (ent->client->quad_framenum > level.framenum) {
 		ent->client->ps.stats[STAT_TIMER_ICON] = gi.imageindex ("p_quad");
 		ent->client->ps.stats[STAT_TIMER] = (ent->client->quad_framenum - level.framenum)/10;
 	}
@@ -468,8 +475,9 @@ void G_SetStats (edict_t *ent)
 	}
 	else
 	{
-		ent->client->ps.stats[STAT_TIMER_ICON] = 0;
-		ent->client->ps.stats[STAT_TIMER] = 0;
+		ent->client->ps.stats[STAT_TIMER_ICON] = gi.imageindex ("p_quad");
+		ent->client->ps.stats[STAT_TIMER] = ent->client->pers.weapon_levels[ent->client->ammo_index];
+		
 	}
 
 	//
