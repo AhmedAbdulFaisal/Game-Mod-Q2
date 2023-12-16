@@ -121,7 +121,6 @@ qboolean Pickup_Weapon (edict_t *ent, edict_t *other)
 	gitem_t		*ammo;
 
 	index = ITEM_INDEX(ent->item);
-
 	if ( ( ((int)(dmflags->value) & DF_WEAPONS_STAY) || coop->value) 
 		&& other->client->pers.inventory[index])
 	{
@@ -865,25 +864,30 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 		
 		if (ent->client->pers.weapon_levels[ent->client->ammo_index] >= 0 && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 10) {
 			damage *= 1;
+			fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
 		}
 		else if (ent->client->pers.weapon_levels[ent->client->ammo_index] >= 10 && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 20) {
 			damage *= 2;	
+			fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
 		}
 		else if (ent->client->pers.weapon_levels[ent->client->ammo_index] >= 20 && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 30) {
 			damage *= 3;
+			fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
 		}
+		
 		
 		//if (ent->takedamage) {
 		//	Com_Printf("You have lost your damage streak\n");
 		//	ent->client->pers.weapon_levels[0] = 0;
 		//}
 
-		fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
+		//fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
+		/* Just testing some stuff */
 
 		/* If there is damage, we ramp the score*/
 		if (fire_check(ent, start, forward) && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 30) {
 			update_kill(ent, ent->client->ammo_index);
-			Com_Printf("Pistol XP: %d \n", ent->client->pers.weapon_levels[ent->client->ammo_index]);
+			//Com_Printf("Pistol XP: %d \n", ent->client->pers.weapon_levels[ent->client->ammo_index]);
 		}
 
 		//Com_Printf("Taking Damage: %d \n", ent.taked);
@@ -1028,9 +1032,9 @@ void Machinegun_Fire (edict_t *ent)
 	vec3_t		forward, right;
 	vec3_t		angles;
 	int			damage = 8;
-	int			kick = 1;
+	int			kick = 2;
 	vec3_t		offset;
-	int			total_shots = 3;
+	int			total_shots = 9;
 
 	if (!(ent->client->buttons & BUTTON_ATTACK))
 	{
@@ -1073,23 +1077,24 @@ void Machinegun_Fire (edict_t *ent)
 		damage *= 3;
 	}
 
-	/* 
-	for (i=1 ; i<3 ; i++)
-	{
-		ent->client->kick_origin[i] = crandom() * 0.35;
-		ent->client->kick_angles[i] = crandom() * 0.1;
-	}
-	ent->client->kick_origin[0] = crandom() * 0.35;
-	ent->client->kick_angles[0] = ent->client->machinegun_shots * -1.5;
+	if (!is_silenced) {
+		for (i = 1; i < 3; i++)
+		{
+			ent->client->kick_origin[i] = crandom() * 0.35;
+			ent->client->kick_angles[i] = crandom() * 0.7;
+		}
+		ent->client->kick_origin[0] = crandom() * 0.35;
+		ent->client->kick_angles[0] = ent->client->machinegun_shots * -1.5;
 
-	// raise the gun as it is firing
-	if (!deathmatch->value)
-	{
-		ent->client->machinegun_shots++;
-		if (ent->client->machinegun_shots > total_shots)
-			ent->client->machinegun_shots = total_shots;
+
+		if (!deathmatch->value)
+		{
+			ent->client->machinegun_shots++;
+			if (ent->client->machinegun_shots > total_shots)
+				ent->client->machinegun_shots = total_shots;
+		}
 	}
-	*/
+	
 	// get start / end positions
 	VectorAdd (ent->client->v_angle, ent->client->kick_angles, angles);
 	AngleVectors (angles, forward, right, NULL);
@@ -1101,8 +1106,8 @@ void Machinegun_Fire (edict_t *ent)
 	if (fire_check(ent, start, forward) && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 30) {
 		update_kill(ent, ent->client->ammo_index);
 	}
-	Com_Printf("MachineGun XP: %d \n", ent->client->pers.weapon_levels[ent->client->ammo_index]);
-	Com_Printf("MachineGun Damage: %d \n", damage);
+	//Com_Printf("MachineGun XP: %d \n", ent->client->pers.weapon_levels[ent->client->ammo_index]);
+	//Com_Printf("MachineGun Damage: %d \n", damage);
 
 	gi.WriteByte (svc_muzzleflash);
 	gi.WriteShort (ent-g_edicts);
@@ -1329,7 +1334,7 @@ void weapon_shotgun_fire (edict_t *ent)
 
 	if (fire_check(ent, start, forward) && ent->client->pers.weapon_levels[2] <= 30) {
 		update_kill(ent, 2);
-		Com_Printf("Shotgun XP: %d \n", ent->client->pers.weapon_levels[2]);
+		//Com_Printf("Shotgun XP: %d \n", ent->client->pers.weapon_levels[2]);
 	}
 
 	// send muzzle flash
@@ -1389,7 +1394,7 @@ void weapon_supershotgun_fire (edict_t *ent)
 
 	if (fire_check(ent, start, forward) && ent->client->pers.weapon_levels[3] <= 30) {
 		update_kill(ent, 3);
-		Com_Printf("Shotgun XP: %d \n", ent->client->pers.weapon_levels[3]);
+		//Com_Printf("Shotgun XP: %d \n", ent->client->pers.weapon_levels[3]);
 	}
 
 	// send muzzle flash

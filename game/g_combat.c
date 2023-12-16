@@ -519,8 +519,28 @@ void T_Damage (edict_t *targ, edict_t *inflictor, edict_t *attacker, vec3_t dir,
 	{
 
 		//add level up code here or something
-		Com_Printf("Lmao you got damaged, you lost all your fucking levels dumbass lmao:\n");
-		targ->client->pers.weapon_levels[targ->client->ammo_index] = 0;
+		if (targ->client->quad_framenum > level.framenum) {
+			//Com_Printf("The Seal Protects You...\n");
+			gi.centerprintf(targ, "The seal protects you...", NULL);
+		}
+		else {
+			//if (targ->client->pers.weapon_levels[targ->client->ammo_index] < 0) {
+			//	targ->client->pers.weapon_levels[targ->client->ammo_index] = 0;
+			//}
+			gi.centerprintf(targ, "You have lost XP!", NULL);
+			targ->client->pers.weapon_levels[targ->client->ammo_index] = 0;
+			targ->s.effects = EF_PLASMA;
+			/* 
+			if (targ->client->ps.stats[ArmorIndex] >= 25) { //if armor is greater than zero, we make xp loss not as punishing
+				targ->client->pers.weapon_levels[targ->client->ammo_index]-=1;
+			}
+			else {
+				gi.centerprintf(targ, "You have lost your streak!", NULL);
+				targ->client->pers.weapon_levels[targ->client->ammo_index] = 0;
+				targ->s.effects = EF_PLASMA;
+			}
+			*/
+		}
 
 		if (!(targ->flags & FL_GODMODE) && (take))
 			targ->pain (targ, attacker, knockback, take);

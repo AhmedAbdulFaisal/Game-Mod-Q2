@@ -399,6 +399,7 @@ void Use_Quad (edict_t *ent, gitem_t *item)
 void Use_Breather (edict_t *ent, gitem_t *item)
 {
 	ent->client->pers.inventory[ITEM_INDEX(item)]--;
+	flare_create(ent);
 	ValidateSelectedItem (ent);
 
 	if (ent->client->breather_framenum > level.framenum)
@@ -425,12 +426,12 @@ void Use_Envirosuit (edict_t *ent, gitem_t *item)
 }
 
 //======================================================================
-
+/* Unlimited Ammo */
 void	Use_Invulnerability (edict_t *ent, gitem_t *item)
 {
 	ent->client->pers.inventory[ITEM_INDEX(item)]--;
 	ValidateSelectedItem (ent);
-
+	dmflags->value = DF_INFINITE_AMMO;
 	if (ent->client->invincible_framenum > level.framenum)
 		ent->client->invincible_framenum += 300;
 	else
@@ -1696,7 +1697,7 @@ always owned, never in the world
 	// POWERUP ITEMS
 	//
 /*QUAKED item_quad (.3 .3 1) (-16 -16 -16) (16 16 16)
-*/
+*/ //new item - The Seal: Allows you to keep your levels, also includes Quad Damage
 	{
 		"item_quad", 
 		Pickup_Powerup,
@@ -1707,7 +1708,7 @@ always owned, never in the world
 		"models/items/quaddama/tris.md2", EF_ROTATE,
 		NULL,
 /* icon */		"p_quad",
-/* pickup */	"Quad Damage",
+/* pickup */	"The Seal", //Quad Damage
 /* width */		2,
 		60,
 		NULL,
@@ -1719,7 +1720,7 @@ always owned, never in the world
 	},
 
 /*QUAKED item_invulnerability (.3 .3 1) (-16 -16 -16) (16 16 16)
-*/
+*/ /* Unlimited Ammo instead*/
 	{
 		"item_invulnerability",
 		Pickup_Powerup,
@@ -1730,7 +1731,7 @@ always owned, never in the world
 		"models/items/invulner/tris.md2", EF_ROTATE,
 		NULL,
 /* icon */		"p_invulnerability",
-/* pickup */	"Invulnerability",
+/* pickup */	"Unlimited Ammo", //Invulnerability
 /* width */		2,
 		300,
 		NULL,
@@ -1742,7 +1743,7 @@ always owned, never in the world
 	},
 
 /*QUAKED item_silencer (.3 .3 1) (-16 -16 -16) (16 16 16)
-*/
+*/ //Amphetamines: Make the recoil on the machine gun nonexistent
 	{
 		"item_silencer",
 		Pickup_Powerup,
@@ -1753,7 +1754,7 @@ always owned, never in the world
 		"models/items/silencer/tris.md2", EF_ROTATE,
 		NULL,
 /* icon */		"p_silencer",
-/* pickup */	"Silencer",
+/* pickup */	"Amphetamines", //Silencer
 /* width */		2,
 		60,
 		NULL,
@@ -1765,10 +1766,12 @@ always owned, never in the world
 	},
 
 /*QUAKED item_breather (.3 .3 1) (-16 -16 -16) (16 16 16)
+	REPLACEMENT ITEM - Illumination Flare (Illuminates area around player - buggy and very hard to implement)
+
 */
 	{
 		"item_breather",
-		Pickup_Powerup,
+		Pickup_Powerup, //
 		Use_Breather,
 		Drop_General,
 		NULL,
@@ -1776,7 +1779,7 @@ always owned, never in the world
 		"models/items/breather/tris.md2", EF_ROTATE,
 		NULL,
 /* icon */		"p_rebreather",
-/* pickup */	"Rebreather",
+/* pickup */	"Lighter", //Rebreather
 /* width */		2,
 		60,
 		NULL,
@@ -1878,7 +1881,7 @@ gives +1 to maximum health
 		"models/items/adrenal/tris.md2", EF_ROTATE,
 		NULL,
 /* icon */		"p_adrenaline",
-/* pickup */	"Adrenaline",
+/* pickup */	"Amphetamines", //Adrenaline
 /* width */		2,
 		60,
 		NULL,

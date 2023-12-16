@@ -68,6 +68,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define FL_NO_KNOCKBACK			0x00000800
 #define FL_POWER_ARMOR			0x00001000	// power armor (if any) is active
 #define FL_RESPAWN				0x80000000	// used for item respawning
+#define FL_FLARE                0x00040000
 
 
 #define	FRAMETIME		0.1
@@ -608,6 +609,12 @@ void Jet_ApplySparks(edict_t* ent);
 void Jet_ApplyRolling(edict_t* ent, vec3_t right);
 void Jet_ApplyJet(edict_t* ent, usercmd_t* ucmd);
 
+//
+// flare.c
+//
+void flare_create(edict_t* ent);
+void flare_destroy(edict_t* ent);
+void flare_think(edict_t* ent);
 
 //
 // g_cmds.c
@@ -971,6 +978,8 @@ struct gclient_s
 	int			silencer_shots;
 	int			weapon_sound;
 
+	int			flare;
+
 	float		pickup_msg_time;
 
 	float		flood_locktill;		// locked from talking
@@ -1131,5 +1140,9 @@ struct edict_s
 	// common data blocks
 	moveinfo_t		moveinfo;
 	monsterinfo_t	monsterinfo;
+
+	// flare
+	edict_t			*flare;
+	//edict_t			*flashlight;
 };
 

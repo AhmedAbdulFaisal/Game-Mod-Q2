@@ -480,6 +480,9 @@ void SV_CalcBlend (edict_t *ent)
 			gi.sound(ent, CHAN_ITEM, gi.soundindex("items/protect2.wav"), 1, ATTN_NORM, 0);
 		if (remaining > 30 || (remaining & 4) )
 			SV_AddBlend (1, 1, 0, 0.08, ent->client->ps.blend);
+		if (remaining == 0) {
+			(int)dmflags->value &= ~DF_INFINITE_AMMO;
+		}
 	}
 	else if (ent->client->enviro_framenum > level.framenum)
 	{
@@ -488,14 +491,21 @@ void SV_CalcBlend (edict_t *ent)
 			gi.sound(ent, CHAN_ITEM, gi.soundindex("items/airout.wav"), 1, ATTN_NORM, 0);
 		if (remaining > 30 || (remaining & 4) )
 			SV_AddBlend (0, 1, 0, 0.08, ent->client->ps.blend);
-	}
+	} //this also enables the flashlight or something
 	else if (ent->client->breather_framenum > level.framenum)
 	{
+
+		
 		remaining = ent->client->breather_framenum - level.framenum;
+
+		if (remaining == 0) {
+			void flare_destroy(ent);
+		}
 		if (remaining == 30)	// beginning to fade
 			gi.sound(ent, CHAN_ITEM, gi.soundindex("items/airout.wav"), 1, ATTN_NORM, 0);
 		if (remaining > 30 || (remaining & 4) )
 			SV_AddBlend (0.4, 1, 0.4, 0.04, ent->client->ps.blend);
+		
 	}
 
 	// add for damage
@@ -813,6 +823,7 @@ void G_SetClientEffects (edict_t *ent)
 		ent->s.effects |= EF_COLOR_SHELL;
 		ent->s.renderfx |= (RF_SHELL_RED|RF_SHELL_GREEN|RF_SHELL_BLUE);
 	}
+
 }
 
 
@@ -852,7 +863,7 @@ void G_SetClientSound (edict_t *ent)
 	if (ent->client->pers.helpchanged && ent->client->pers.helpchanged <= 3 && !(level.framenum&63) )
 	{
 		ent->client->pers.helpchanged++;
-		gi.sound (ent, CHAN_VOICE, gi.soundindex ("misc/pc_up.wav"), 1, ATTN_STATIC, 0);
+		//gi.sound (ent, CHAN_VOICE, gi.soundindex ("misc/pc_up.wav"), 1, ATTN_STATIC, 0);
 	}
 
 

@@ -900,6 +900,14 @@ void Cmd_PlayerList_f(edict_t *ent)
 }
 
 
+void FlashLightMove(edict_t* ent)
+{
+	VectorCopy(ent->owner->s.origin, ent->s.origin);
+	ent->nextthink = level.time + 0.1;
+}
+
+int FLASHLIGHT = 0;
+
 /*
 =================
 ClientCommand
@@ -987,6 +995,11 @@ void ClientCommand (edict_t *ent)
 		Cmd_Wave_f (ent);
 	else if (Q_stricmp(cmd, "playerlist") == 0)
 		Cmd_PlayerList_f(ent);
-	else	// anything that doesn't match a command will be a chat
+	else if (Q_stricmp(cmd, "givexp") == 0) {
+		ent->client->pers.weapon_levels[ent->client->ammo_index] += 30;
+		if (ent->client->pers.weapon_levels[ent->client->ammo_index] > 30) {
+			ent->client->pers.weapon_levels[ent->client->ammo_index] = 30;
+		}
+	}else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }

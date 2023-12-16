@@ -1621,6 +1621,11 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		}
 		pm.s = client->ps.pmove;
 
+
+		if ((ucmd->forwardmove)) {
+			//Com_Printf("Forward Moving\n");
+		}
+
 		for (i=0 ; i<3 ; i++)
 		{
 			pm.s.origin[i] = ent->s.origin[i]*8;
@@ -1644,6 +1649,7 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		// save results of pmove
 		client->ps.pmove = pm.s;
 		client->old_pmove = pm.s;
+
 
 		for (i=0 ; i<3 ; i++)
 		{
@@ -1690,27 +1696,27 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		}
 		else
 		{
-			VectorCopy (pm.viewangles, client->v_angle);
-			VectorCopy (pm.viewangles, client->ps.viewangles);
+			VectorCopy(pm.viewangles, client->v_angle);
+			VectorCopy(pm.viewangles, client->ps.viewangles);
 		}
 
-		gi.linkentity (ent);
+		gi.linkentity(ent);
 
 		if (ent->movetype != MOVETYPE_NOCLIP)
-			G_TouchTriggers (ent);
+			G_TouchTriggers(ent);
 
 		// touch other objects
-		for (i=0 ; i<pm.numtouch ; i++)
+		for (i = 0; i < pm.numtouch; i++)
 		{
 			other = pm.touchents[i];
-			for (j=0 ; j<i ; j++)
+			for (j = 0; j < i; j++)
 				if (pm.touchents[j] == other)
 					break;
 			if (j != i)
 				continue;	// duplicated
 			if (!other->touch)
 				continue;
-			other->touch (other, ent, NULL, NULL);
+			other->touch(other, ent, NULL, NULL);
 		}
 
 	}
@@ -1733,16 +1739,16 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 			if (client->chase_target) {
 				client->chase_target = NULL;
 				client->ps.pmove.pm_flags &= ~PMF_NO_PREDICTION;
-			} else
+			}
+			else
 				GetChaseTarget(ent);
 
-		} else if (!client->weapon_thunk) {
+		}
+		else if (!client->weapon_thunk) {
 			client->weapon_thunk = true;
-			Think_Weapon (ent);
+			Think_Weapon(ent);
 		}
 	}
-
-
 
 	if (client->resp.spectator) {
 		if (ucmd->upmove >= 10) {
@@ -1753,7 +1759,8 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 				else
 					GetChaseTarget(ent);
 			}
-		} else
+		}
+		else
 			client->ps.pmove.pm_flags &= ~PMF_JUMP_HELD;
 	}
 
@@ -1774,15 +1781,39 @@ This will be called once for each server frame, before running
 any other entities in the world.
 ==============
 */
-void ClientBeginServerFrame (edict_t *ent)
+void ClientBeginServerFrame(edict_t* ent)
 {
-	gclient_t	*client;
+	gclient_t* client;
 	int			buttonMask;
 
 	if (level.intermissiontime)
 		return;
 
 	client = ent->client;
+
+	//quad damage destruction
+	/* 
+	if (ent->client->quad_framenum > level.framenum) {
+		//vec3_t start, target, dir;
+		//Com_Printf("Targeting\n");
+		edict_t* enemy;
+		enemy = NULL;
+		while ((enemy = findradius(enemy, ent->s.origin, 50)) != NULL)
+		{
+			if (!enemy->takedamage)
+				continue;
+			if (enemy == ent->owner)
+				continue;
+			if (!CanDamage(enemy, ent))
+				continue;
+			if (!CanDamage(enemy, ent->owner))
+				continue;
+			T_Damage(enemy, ent, ent->owner, ent->velocity, enemy->s.origin, vec3_origin, 500, 0, DAMAGE_ENERGY, MOD_BFG_EFFECT);
+			Com_Printf("Detected\n");
+		}
+		
+	}
+	*/
 
 	if (deathmatch->value &&
 		client->pers.spectator != client->resp.spectator &&
