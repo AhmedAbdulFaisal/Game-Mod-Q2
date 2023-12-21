@@ -1,4 +1,7 @@
-/* File copied from planetquake's Jetpack tutorial */
+/* File copied from planetquake's Jetpack tutorial 
+* Original credit goes to PlanetQuake
+*
+*/
 #include "g_local.h"
 
 /*we get silly velocity-effects when we are on ground and try to

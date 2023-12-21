@@ -448,7 +448,7 @@ void SV_CalcBlend (edict_t *ent)
 		ent->client->jet_remaining = ent->client->jet_framenum - level.framenum;
 
 		if ((int)ent->client->jet_remaining == 0) {
-			ent->client->pers.inventory[ITEM_INDEX(FindItem("Jetpack"))] = 0;
+			ent->client->pers.inventory[ITEM_INDEX(FindItem("Shitty Jetpack"))] = 0;
 		}
 		if (((int)ent->client->jet_remaining % 6) == 0) {
 			gi.sound(ent, CHAN_AUTO, gi.soundindex("hover/hovidle1.wav"), 0.9, ATTN_NORM, 0);

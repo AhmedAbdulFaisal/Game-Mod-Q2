@@ -231,6 +231,7 @@ qboolean Pickup_Adrenaline (edict_t *ent, edict_t *other)
 {
 	if (!deathmatch->value)
 		other->max_health += 1;
+		other->client->pers.weapon_levels[other->client->ammo_index]+=10;
 
 	if (other->health < other->max_health)
 		other->health = other->max_health;
@@ -256,6 +257,8 @@ qboolean Pickup_Bandolier (edict_t *ent, edict_t *other)
 	gitem_t	*item;
 	int		index;
 
+	other->client->pers.max_levels = 40;
+	gi.centerprintf(other, "Max Levels increased to 40!", NULL);
 	if (other->client->pers.max_bullets < 250)
 		other->client->pers.max_bullets = 250;
 	if (other->client->pers.max_shells < 150)
@@ -293,6 +296,10 @@ qboolean Pickup_Pack (edict_t *ent, edict_t *other)
 {
 	gitem_t	*item;
 	int		index;
+
+
+	other->client->pers.max_levels = 50;
+	gi.centerprintf(other, "Max Levels increased to 50!", NULL);
 
 	if (other->client->pers.max_bullets < 300)
 		other->client->pers.max_bullets = 300;
@@ -401,7 +408,7 @@ void Use_Breather (edict_t *ent, gitem_t *item)
 	ent->client->pers.inventory[ITEM_INDEX(item)]--;
 	flare_create(ent);
 	ValidateSelectedItem (ent);
-
+	gi.centerprintf(ent, "I have no fuc*ing idea what's going on", NULL);
 	if (ent->client->breather_framenum > level.framenum)
 		ent->client->breather_framenum += 300;
 	else
@@ -431,7 +438,8 @@ void	Use_Invulnerability (edict_t *ent, gitem_t *item)
 {
 	ent->client->pers.inventory[ITEM_INDEX(item)]--;
 	ValidateSelectedItem (ent);
-	dmflags->value = DF_INFINITE_AMMO;
+	gi.centerprintf(ent, "If you have ammo, it shall not be wasted", NULL);
+	//dmflags->value = DF_INFINITE_AMMO;
 	if (ent->client->invincible_framenum > level.framenum)
 		ent->client->invincible_framenum += 300;
 	else
@@ -446,9 +454,9 @@ void	Use_Silencer (edict_t *ent, gitem_t *item)
 {
 	ent->client->pers.inventory[ITEM_INDEX(item)]--;
 	ValidateSelectedItem (ent);
-	ent->client->silencer_shots += 30;
-
-//	gi.sound(ent, CHAN_ITEM, gi.soundindex("items/damage.wav"), 1, ATTN_NORM, 0);
+	ent->client->silencer_shots += 50;
+	gi.centerprintf(ent, "You feel a bit weird inside...", NULL);
+	gi.sound(ent, CHAN_ITEM, gi.soundindex("insane/insane3.wav"), 1, ATTN_NORM, 0);
 }
 
 //======================================================================
@@ -595,6 +603,8 @@ qboolean Pickup_Health (edict_t *ent, edict_t *other)
 
 	other->health += ent->count;
 
+	other->client->pers.weapon_levels[other->client->ammo_index]++;
+
 	if (!(ent->style & HEALTH_IGNORE_MAX))
 	{
 		if (other->health > other->max_health)
@@ -739,7 +749,7 @@ int PowerArmorType (edict_t *ent)
 void Use_PowerArmor (edict_t *ent, gitem_t *item)
 {
 	int		index;
-
+	gi.centerprintf(ent, "Double Damage!", NULL);
 	if (ent->flags & FL_POWER_ARMOR)
 	{
 		ent->flags &= ~FL_POWER_ARMOR;
@@ -1292,7 +1302,7 @@ gitem_t	itemlist[] =
 	},
 
 /*QUAKED item_power_shield (.3 .3 1) (-16 -16 -16) (16 16 16)
-*/
+*/ /* Pow*/
 	{
 		"item_power_shield",
 		Pickup_PowerArmor,
@@ -1303,7 +1313,7 @@ gitem_t	itemlist[] =
 		"models/items/armor/shield/tris.md2", EF_ROTATE,
 		NULL,
 /* icon */		"i_powershield",
-/* pickup */	"Power Shield",
+/* pickup */	"Standard Issue", //Power Shield
 /* width */		0,
 		60,
 		NULL,
@@ -1743,7 +1753,7 @@ always owned, never in the world
 	},
 
 /*QUAKED item_silencer (.3 .3 1) (-16 -16 -16) (16 16 16)
-*/ //Amphetamines: Make the recoil on the machine gun nonexistent
+*/ //Adderol: Make the recoil on the machine gun nonexistent
 	{
 		"item_silencer",
 		Pickup_Powerup,
@@ -1754,7 +1764,7 @@ always owned, never in the world
 		"models/items/silencer/tris.md2", EF_ROTATE,
 		NULL,
 /* icon */		"p_silencer",
-/* pickup */	"Amphetamines", //Silencer
+/* pickup */	"Adderol", //Silencer
 /* width */		2,
 		60,
 		NULL,
@@ -1904,7 +1914,7 @@ gives +1 to maximum health
 		"models/items/band/tris.md2", EF_ROTATE,
 		NULL,
 /* icon */		"p_bandolier",
-/* pickup */	"Bandolier",
+/* pickup */	"XP1", //Bandolier
 /* width */		2,
 		60,
 		NULL,
@@ -1916,7 +1926,7 @@ gives +1 to maximum health
 	},
 
 /*QUAKED item_pack (.3 .3 1) (-16 -16 -16) (16 16 16)
-*/
+*/ /* Experience Upgrade B - increases max levels to 50*/
 	{
 		"item_pack",
 		Pickup_Pack,
@@ -1927,7 +1937,7 @@ gives +1 to maximum health
 		"models/items/pack/tris.md2", EF_ROTATE,
 		NULL,
 /* icon */		"i_pack",
-/* pickup */	"Ammo Pack",
+/* pickup */	"XP2", //Ammo Pack
 /* width */		2,
 		180,
 		NULL,
@@ -2279,5 +2289,5 @@ void SetItemNames (void)
 	combat_armor_index = ITEM_INDEX(FindItem("Combat Armor"));
 	body_armor_index   = ITEM_INDEX(FindItem("Body Armor"));
 	power_screen_index = ITEM_INDEX(FindItem("Power Screen"));
-	power_shield_index = ITEM_INDEX(FindItem("Power Shield"));
+	power_shield_index = ITEM_INDEX(FindItem("Standard Issue"));  //Power Shield
 }

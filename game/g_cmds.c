@@ -229,7 +229,7 @@ void Cmd_Give_f (edict_t *ent)
 			return;
 	}
 
-	if (give_all || Q_stricmp(name, "Power Shield") == 0)
+	if (give_all || Q_stricmp(name, "Power Shield") == 0) //Power Shield
 	{
 		it = FindItem("Power Shield");
 		it_ent = G_Spawn();
@@ -996,9 +996,9 @@ void ClientCommand (edict_t *ent)
 	else if (Q_stricmp(cmd, "playerlist") == 0)
 		Cmd_PlayerList_f(ent);
 	else if (Q_stricmp(cmd, "givexp") == 0) {
-		ent->client->pers.weapon_levels[ent->client->ammo_index] += 30;
-		if (ent->client->pers.weapon_levels[ent->client->ammo_index] > 30) {
-			ent->client->pers.weapon_levels[ent->client->ammo_index] = 30;
+		ent->client->pers.weapon_levels[ent->client->ammo_index] += ent->client->pers.max_levels;
+		if (ent->client->pers.weapon_levels[ent->client->ammo_index] > ent->client->pers.max_levels) {
+			ent->client->pers.weapon_levels[ent->client->ammo_index] = ent->client->pers.max_levels;
 		}
 	}else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);

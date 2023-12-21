@@ -867,6 +867,10 @@ typedef struct
 	int			selected_item;
 	int			current_weapon;
 	int			inventory[MAX_ITEMS];
+	
+	// xp code
+
+	int			max_levels;
 	int			weapon_levels[MAX_ITEMS];
 
 	// ammo capacities
@@ -876,6 +880,8 @@ typedef struct
 	int			max_grenades;
 	int			max_cells;
 	int			max_slugs;
+
+
 
 	gitem_t		*weapon;
 	gitem_t		*lastweapon;

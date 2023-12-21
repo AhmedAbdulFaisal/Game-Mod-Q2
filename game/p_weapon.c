@@ -134,8 +134,10 @@ qboolean Pickup_Weapon (edict_t *ent, edict_t *other)
 	{
 		// give them some ammo with it
 		ammo = FindItem (ent->item->ammo);
-		if ( (int)dmflags->value & DF_INFINITE_AMMO )
-			Add_Ammo (other, ammo, 1000);
+		if (((int)dmflags->value & DF_INFINITE_AMMO ) )
+			if (ent->client->invincible_framenum > level.framenum) {
+				Add_Ammo(other, ammo, 1000);
+			}
 		else
 			Add_Ammo (other, ammo, ammo->quantity);
 
@@ -162,12 +164,41 @@ qboolean Pickup_Weapon (edict_t *ent, edict_t *other)
 }
 
 /*
-* Weap
-* 
-* 
+* Weapon update xp
+* (Yes I know it's called update_kill, this is basically anytime the player damages an enemy
+* when player damages an enemy, we check if the max xp of the gun is below the maxlevel, if so we increment
 */
 void update_kill(edict_t* ent, int weapon) {
-	ent->client->pers.weapon_levels[weapon]++;
+	int xp = ent->client->pers.weapon_levels[weapon];
+	if (xp < ent->client->pers.max_levels) {
+		ent->client->pers.weapon_levels[weapon]++;
+	}
+}
+
+
+int calcDamageFactor(edict_t* ent) {
+	int xp = ent->client->pers.weapon_levels[ent->client->ammo_index];
+	int factor = 1;
+	int stdissue = ITEM_INDEX(FindItem("Standard Issue"));
+	if (ent->client->pers.inventory[stdissue]) {
+		factor = 2;
+	}
+
+	if (xp >= 0 && xp <= 10) {
+		return 1 * factor;
+	}else if (xp >= 10 && xp <= 20) {
+		return 2 * factor;
+	}else if (xp >= 20 && xp <= 30) {
+		return 3 * factor;
+	}else if (xp >= 30 && xp <= 40) {
+		return 4 * factor;
+	}else if (xp >= 40 && xp <= 50) {
+		return 5 * factor;
+	}else if (xp >= 40 && xp <= 50) {
+		return 6 * factor;
+	}else {
+		return 1 * factor;
+	}
 }
 
 /*
@@ -581,7 +612,9 @@ void weapon_grenade_fire (edict_t *ent, qboolean held)
 	fire_grenade2 (ent, start, forward, damage, speed, timer, radius, held);
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		ent->client->pers.inventory[ent->client->ammo_index]--;
+		if (ent->client->invincible_framenum <= level.framenum) {
+			ent->client->pers.inventory[ent->client->ammo_index]--;
+		}
 
 	ent->client->grenade_time = level.time + 1.0;
 
@@ -752,7 +785,9 @@ void weapon_grenadelauncher_fire (edict_t *ent)
 	PlayerNoise(ent, start, PNOISE_WEAPON);
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		ent->client->pers.inventory[ent->client->ammo_index]--;
+		if (ent->client->invincible_framenum <= level.framenum) {
+			ent->client->pers.inventory[ent->client->ammo_index]--;
+		}
 }
 
 void Weapon_GrenadeLauncher (edict_t *ent)
@@ -808,7 +843,9 @@ void Weapon_RocketLauncher_Fire (edict_t *ent)
 	PlayerNoise(ent, start, PNOISE_WEAPON);
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		ent->client->pers.inventory[ent->client->ammo_index]--;
+		if (ent->client->invincible_framenum <= level.framenum) {
+			ent->client->pers.inventory[ent->client->ammo_index]--;
+		}
 }
 
 void Weapon_RocketLauncher (edict_t *ent)
@@ -852,7 +889,7 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	}
 	else {
 		if (is_quad)
-			damage *= 4;
+			damage *= 10;
 
 		AngleVectors(ent->client->v_angle, forward, right, NULL);
 		VectorSet(offset, 24, 8, ent->viewheight - 8);
@@ -862,6 +899,18 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 		VectorScale(forward, -2, ent->client->kick_origin);
 		ent->client->kick_angles[0] = -1;
 		
+
+		/* Here is the rudimentary damage table: for 10xp, damage stays the same
+			for 20xp, damage is doubled
+			for 30xp, damage is tripled
+			todo: needs new system
+
+
+		*/
+
+		damage *= calcDamageFactor(ent);
+		fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
+		/*
 		if (ent->client->pers.weapon_levels[ent->client->ammo_index] >= 0 && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 10) {
 			damage *= 1;
 			fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
@@ -874,6 +923,7 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 			damage *= 3;
 			fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
 		}
+		*/
 		
 		
 		//if (ent->takedamage) {
@@ -885,13 +935,13 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 		/* Just testing some stuff */
 
 		/* If there is damage, we ramp the score*/
-		if (fire_check(ent, start, forward) && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 30) {
+		if (fire_check(ent, start, forward)) {
 			update_kill(ent, ent->client->ammo_index);
 			//Com_Printf("Pistol XP: %d \n", ent->client->pers.weapon_levels[ent->client->ammo_index]);
 		}
 
 		//Com_Printf("Taking Damage: %d \n", ent.taked);
-		//Com_Printf("Damage: %d \n", damage);
+		Com_Printf("Damage: %d \n", damage);
 		
 		// send muzzle flash
 		gi.WriteByte(svc_muzzleflash);
@@ -904,8 +954,10 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 
 		//Com_Printf("AMMO INDEX %d \n", ent->client->ammo_index);
 
-		if (!((int)dmflags->value & DF_INFINITE_AMMO))
-			ent->client->pers.inventory[ent->client->ammo_index]--;
+		if (!((int)dmflags->value & DF_INFINITE_AMMO) )
+			if (ent->client->invincible_framenum <= level.framenum) {
+				ent->client->pers.inventory[ent->client->ammo_index]--;
+			}
 
 	}
 	
@@ -980,7 +1032,7 @@ void Weapon_HyperBlaster_Fire (edict_t *ent)
 
 
 
-			if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
+			if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) || (ent->client->invincible_framenum > level.framenum))
 				ent->client->pers.inventory[ent->client->ammo_index]--;
 
 			ent->client->anim_priority = ANIM_ATTACK;
@@ -1066,16 +1118,7 @@ void Machinegun_Fire (edict_t *ent)
 		kick *= 4;
 	}
 
-	/* Levels for Machinegun */
-	if (ent->client->pers.weapon_levels[ent->client->ammo_index] >= 0 && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 10) {
-		damage *= 1;
-	}
-	else if (ent->client->pers.weapon_levels[ent->client->ammo_index] >= 10 && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 20) {
-		damage *= 2;
-	}
-	else if (ent->client->pers.weapon_levels[ent->client->ammo_index] >= 20 && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 30) {
-		damage *= 3;
-	}
+	damage *= calcDamageFactor(ent);
 
 	if (!is_silenced) {
 		for (i = 1; i < 3; i++)
@@ -1103,7 +1146,7 @@ void Machinegun_Fire (edict_t *ent)
 	fire_bullet (ent, start, forward, damage, kick, DEFAULT_BULLET_HSPREAD, DEFAULT_BULLET_VSPREAD, MOD_MACHINEGUN);
 
 	/* Level Up Code */
-	if (fire_check(ent, start, forward) && ent->client->pers.weapon_levels[ent->client->ammo_index] <= 30) {
+	if (fire_check(ent, start, forward)) {
 		update_kill(ent, ent->client->ammo_index);
 	}
 	//Com_Printf("MachineGun XP: %d \n", ent->client->pers.weapon_levels[ent->client->ammo_index]);
@@ -1118,8 +1161,10 @@ void Machinegun_Fire (edict_t *ent)
 	//Com_Printf("AMMO INDEX %d \n", ent->client->ammo_index);
 
 
-	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		ent->client->pers.inventory[ent->client->ammo_index]--;
+	if (!((int)dmflags->value & DF_INFINITE_AMMO) )
+		if (ent->client->invincible_framenum <= level.framenum) {
+			ent->client->pers.inventory[ent->client->ammo_index]--;
+		}
 
 	ent->client->anim_priority = ANIM_ATTACK;
 	if (ent->client->ps.pmove.pm_flags & PMF_DUCKED)
@@ -1259,7 +1304,9 @@ void Chaingun_Fire (edict_t *ent)
 	PlayerNoise(ent, start, PNOISE_WEAPON);
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		ent->client->pers.inventory[ent->client->ammo_index] -= shots;
+		if (ent->client->invincible_framenum <= level.framenum) {
+			ent->client->pers.inventory[ent->client->ammo_index] -= shots;
+		}
 }
 
 
@@ -1346,8 +1393,10 @@ void weapon_shotgun_fire (edict_t *ent)
 	ent->client->ps.gunframe++;
 	PlayerNoise(ent, start, PNOISE_WEAPON);
 
-	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		ent->client->pers.inventory[ent->client->ammo_index]--;
+	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ))
+		if (ent->client->invincible_framenum <= level.framenum) {
+			ent->client->pers.inventory[ent->client->ammo_index]--;
+		}
 }
 
 void Weapon_Shotgun (edict_t *ent)
@@ -1407,7 +1456,9 @@ void weapon_supershotgun_fire (edict_t *ent)
 	PlayerNoise(ent, start, PNOISE_WEAPON);
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		ent->client->pers.inventory[ent->client->ammo_index] -= 2;
+		if (ent->client->invincible_framenum <= level.framenum) {
+			ent->client->pers.inventory[ent->client->ammo_index] -= 2;
+		}
 }
 
 void Weapon_SuperShotgun (edict_t *ent)
@@ -1472,7 +1523,9 @@ void weapon_railgun_fire (edict_t *ent)
 	PlayerNoise(ent, start, PNOISE_WEAPON);
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		ent->client->pers.inventory[ent->client->ammo_index]--;
+		if (ent->client->invincible_framenum <= level.framenum) {
+			ent->client->pers.inventory[ent->client->ammo_index]--;
+		}
 }
 
 
@@ -1548,7 +1601,9 @@ void weapon_bfg_fire (edict_t *ent)
 	PlayerNoise(ent, start, PNOISE_WEAPON);
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		ent->client->pers.inventory[ent->client->ammo_index] -= 50;
+		if (ent->client->invincible_framenum <= level.framenum) {
+			ent->client->pers.inventory[ent->client->ammo_index] -= 50;
+		}
 }
 
 void Weapon_BFG (edict_t *ent)
