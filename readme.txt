@@ -1,29 +1,24 @@
+Quake 2 Mod:
 
-This is the complete source code for Quake 2, version 3.19, buildable with
-visual C++ 6.0.  The linux version should be buildable, but we haven't
-tested it for the release.
+This is my Game Mod project for Quake 2, internally called 'Quake 2: Special Forces'. It introduces elements such as new powerups, and an XP-based system which allows you to multiply your damage through weapons XP.
 
-The code is all licensed under the terms of the GPL (gnu public license).  
-You should read the entire license, but the gist of it is that you can do 
-anything you want with the code, including sell your new version.  The catch 
-is that if you distribute new binary versions, you are required to make the 
-entire source code available for free to everyone.
+Different guns can carry XP. You need to damage enemies with a gun to get XP for that gun. For every 10 XP you gain, the damage of the gun increases - allowing you to kill enemies quicker.
+An example: shooting an enemy with the blaster gives you +1XP. getting 10 XP with your blaster gives you double damage, while getting 20XP gives you triple damage, and so on. If you are hurt by an enemy, you loose all your levels (save powerups)
 
-The primary intent of this release is for entertainment and educational 
-purposes, but the GPL does allow commercial exploitation if you obey the 
-full license.  If you want to do something commercial and you just can't bear 
-to have your source changes released, we could still negotiate a separate 
-license agreement (for $$$), but I would encourage you to just live with the 
-GPL.
+(Each item's internal name is given in quotations)
 
-All of the Q2 data files remain copyrighted and licensed under the 
-original terms, so you cannot redistribute data from the original game, but if 
-you do a true total conversion, you can create a standalone game based on 
-this code.
+There are 5 different one-use pickup items:
+* XP Upgrade 1: "XP1" - upgrades your max XP from 30 to 40
+* XP Upgrade 2: "XP2" - upgrades your max XP from 40 to 50
+* Adderol: "Adderol" Makes machinegun recoin nonexistent
+* Health pickups give you +1XP each
+* Adrenaline pickups give you +10XP each
 
-Thanks to Robert Duffy for doing the grunt work of building this release.
-
-John Carmack
-Id Software
+There are 5 different one-use powerups:
+* The Seal: "The Seal" - prevents you from loosing any XP
+* Lightsuit: "Lightsuit" - gives you a lantern which lasts for a few seconds
+* Standard Armor: "Standard Issue" - doubles your damage for as long as you have cells
+* Unlimited Ammo: "Unlimited Ammo" - you do not consume any ammo you have for the duration of the powerup
+* Jetpack: "Shitty Jetpack" - jetpack for 40 seconds
 
 
